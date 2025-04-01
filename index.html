@@ -6,19 +6,217 @@
     <meta name="description" content="Investigaciones Anónimas: Expertos en homicidios culposos y casos complejos. Confidencialidad 100% garantizada.">
     <meta name="keywords" content="investigación privada, detective anónimo, casos sin resolver, justicia legal">
     <title>Investigaciones Anónimas - Expertos en la Verdad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* === Estilos Base === */
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0d0d0d;
             color: #cccccc;
             line-height: 1.6;
+            overflow-x: hidden;
         }
+
+        /* === Nuevo Diseño para la Sección Inicio === */
+        #inicio {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+            position: relative;
+        }
+
+        .inicio-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .inicio-header h1 {
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .inicio-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* === Tarjetas 3D con Efecto Libro === */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .book-card {
+            background: linear-gradient(145deg, #1a1a1a, #121212);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            cursor: pointer;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .book-card:hover::before {
+            opacity: 1;
+        }
+
+        .book-card.active {
+            transform: rotateY(15deg) translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .book-cover {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(13, 13, 13, 0.95));
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .book-cover h3 {
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin: 0 0 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .book-cover h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #d4af37;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover .book-cover h3::after {
+            transform: scaleX(1);
+        }
+
+        .book-cover .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .book-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 0 2rem;
+            background: #121212;
+            transform-origin: top;
+            opacity: 0;
+        }
+
+        .book-card.active .book-content {
+            max-height: 800px;
+            padding: 2rem;
+            opacity: 1;
+        }
+
+        .book-content p {
+            text-align: left;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .book-content .media-container {
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+
+        .book-content .media-container iframe,
+        .book-content .media-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* === Tipografía Mejorada === */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+        .book-content p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+
+        /* === Efecto de Partículas para Fondo === */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.6);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+        }
+
+        /* === Estilos Originales Conservados === */
         header {
             background: linear-gradient(90deg, #000, #0d0d0d);
             text-align: center;
             padding: 2rem 1rem;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
         }
         header img {
             width: 150px;
@@ -26,155 +224,767 @@
             height: auto;
             margin-bottom: 1rem;
         }
-        nav {
-            background: #111;
-            padding: 1rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        nav a {
-            color: #cccccc;
-            text-decoration: none;
-            margin: 0 1rem;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-        }
-        nav a:hover {
-            color: #d4af37;
-        }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1rem;
+            transition: margin-left 0.3s ease;
+            text-align: center;
         }
+
+        /* === Formulario de Contacto === */
         form {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
+            perspective: 1000px;
         }
-        input, textarea, button {
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            border-radius: 25px;
+            overflow: visible;
+        }
+        #contacto .form-group::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -1px;
+            right: -30px;
+            bottom: -1px;
+            border-radius: inherit;
+            background: linear-gradient(95deg, #ee002d, #c27d26, yellow, green, cyan, blue, purple, red);
+            background-size: 300% 300%;
+            z-index: auto;
+            animation: gamerBorder 20s linear(-2.5 -52.94%, 1.48 83.82%) infinite;
+        }
+        @keyframes gamerBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        #contacto .form-group > * {
+            position: relative;
+            z-index: 1;
+            background: #1a1a1a;
+            border-radius: 22px;
+        }
+        input, textarea {
             width: 100%;
             padding: 0.8rem;
-            margin-bottom: 1rem;
             background: #1a1a1a;
             border: 1px solid #333;
             color: #cccccc;
-            border-radius: 4px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
         button {
             background: #d4af37;
             color: #0d0d0d;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease, transform 0.3s ease;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: block;
+            margin: 0 auto;
         }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: #000;
-            border-top: 2px solid #d4af37;
+        button:hover {
+            background: #b38e2e;
+            transform: translateY(-2px);
         }
-        .grid-3 {
+        #contacto .form-group:hover {
+            transform: rotateY(5deg) rotateX(5deg) scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        /* === Secciones Generales === */
+        .grid-3, .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            max-width: 800px;
+            margin: 2rem auto;
         }
         .card {
             background: #1a1a1a;
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 8px;
             border: 1px solid #d4af3733;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin: 1rem 0;
+            text-align: left;
         }
-        .casos-lista {
-            display: grid;
-            gap: 1.5rem;
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, #d4af3711 0%, transparent 50%);
+            transform: rotate(30deg);
+            transition: 0.5s;
+            pointer-events: none;
         }
-        .caso-item {
-            background: #1a1a1a;
-            padding: 1.5rem;
-            border-left: 4px solid #d4af37;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+        .card:hover::before {
+            left: 150%;
+        }
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.3s ease-out;
+        }
+        .card.active .card-content {
+            max-height: 500px;
+            padding: 1rem 0;
         }
         @media (max-width: 768px) {
             header h1 { font-size: 1.8rem; }
-            nav a { display: block; margin: 0.5rem 0; }
+            .container { padding: 1rem; }
         }
         section:not(.active) { display: none; }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const links = document.querySelectorAll('nav a');
-            const sections = document.querySelectorAll('section');
-            
-            links.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const target = link.dataset.target;
-                    sections.forEach(sec => sec.classList.remove('active'));
-                    document.getElementById(target).classList.add('active');
-                });
-            });
 
-            document.getElementById('inicio').classList.add('active');
-        });
-    </script>
+        /* === Botón Flotante de Contacto === */
+        .contact-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #d4af37;
+            color: #0d0d0d;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+        }
+        .contact-button:hover {
+            background: #b38e2e;
+        }
+
+        /* === Sidebar === */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100%;
+            background: #111;
+            padding: 1rem;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
+            z-index: 1001;
+        }
+        .sidebar.active {
+            left: 0;
+        }
+        .sidebar a {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            margin: 0.5rem 0;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+        .sidebar a:hover {
+            color: #d4af37;
+        }
+        .open-sidebar-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #d4af37;
+            color: #0d0d0d;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+            z-index: 1002;
+        }
+        .open-sidebar-btn:hover {
+            background: #b38e2e;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 999;
+            display: none;
+        }
+
+        /* === Servicios Destacados === */
+        .servicios-destacados {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            margin: 3rem auto;
+            text-align: center;
+            max-width: 800px;
+        }
+        .servicio-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #d4af3733;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: 96%;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        .servicio-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, #d4af3711 0%, transparent 50%);
+            transform: rotate(30deg);
+            transition: 0.5s;
+            pointer-events: none;
+        }
+        .servicio-card:hover::before {
+            left: 150%;
+        }
+        .servicio-card h3 {
+            color: #cccccc;
+            margin: 0;
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+        .servicio-card:hover h3 {
+            color: #d4af37;
+        }
+        .servicio-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.3s ease-out;
+        }
+        .servicio-card.active .servicio-content {
+            max-height: 500px;
+            padding: 1rem 0;
+        }
+        .servicio-content p {
+            color: #cccccc;
+            line-height: 1.6;
+            margin: 0 1rem;
+            text-align: left;
+        }
+        h1, h2, h3, p {
+            text-align: center;
+        }
+
+        /* === Redes Sociales === */
+        .redes-sociales {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 25px 0;
+        }
+        .btn-social {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 28px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-social::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%,
+                rgba(255,255,255,0.25) 0%,
+                rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-social:hover::after {
+            opacity: 1;
+        }
+        .facebook {
+            background: radial-gradient(circle at 30% 30%, #0866FF, #0047B3);
+        }
+        .whatsapp {
+            background: radial-gradient(circle at 30% 30%, #25D366, #128C7E);
+        }
+        .telegram {
+            background: radial-gradient(circle at 30% 30%, #26A5E4, #2A5C8A);
+        }
+        .btn-social:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .btn-social:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        /* === Botones Premium === */
+        .fixed-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fixed-button {
+            background: #1a1a1a;
+            color: #d4af37;
+            border: none;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .fixed-button:hover {
+            transform: translateY(-5px);
+        }
+        .fixed-button.active {
+            border-radius: 15px;
+            width: 280px;
+            height: auto;
+            padding: 20px;
+            background: #0d0d0d;
+            color: #d4af37;
+            transform: translateY(0) scale(1.05);
+            animation: button-active 0.4s ease-out forwards;
+        }
+        @keyframes button-active {
+            0% { width: 60px; }
+            100% { width: 280px; }
+        }
+        .fixed-button.active span {
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 15px;
+            color: #ffffff;
+            animation: typing 1.2s steps(40, end), blink-caret 0.5s step-end infinite, text-glow 1.5s linear infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            50% { border-color: transparent; }
+        }
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 3px #d4af37, 0 0 5px #d4af37; }
+            50% { text-shadow: 0 0 5px #d4af37, 0 0 8px #d4af37; }
+            100% { text-shadow: 0 0 3px #d4af37, 0 0 5px #d4af37; }
+        }
+        .fixed-button i {
+            transition: transform 0.25s ease-out, filter 0.3s ease;
+            min-width: 24px;
+            color: #d4af37;
+        }
+        .fixed-button.active i {
+            transform: rotate(360deg);
+            filter: drop-shadow(0 0 3px #d4af37);
+        }
+
+        /* === Nuevos Efectos === */
+        /* Sello Confidencial */
+        @keyframes stamp {
+            0% { transform: scale(5) rotate(25deg); opacity: 0; }
+            50% { transform: scale(0.9) rotate(-15deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(-15deg); opacity: 0; }
+        }
+        .confidential-stamp {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23FF0000" font-size="30" font-family="Arial" transform="rotate(-30 100 100)">CONFIDENCIAL</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: stamp 1.2s ease-out;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+        }
+
+        /* Fondo Ciudad Nocturna */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(0deg,
+                    rgba(13,13,13,0.9) 20%,
+                    rgba(212,175,55,0.08) 50%,
+                    rgba(13,13,13,0.9) 80%
+                ),
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(212,175,55,0.05) 0px,
+                    rgba(212,175,55,0.05) 2px,
+                    transparent 2px,
+                    transparent 10px
+                );
+            animation: cityLights 12s infinite linear;
+            pointer-events: none;
+            z-index: -1;
+        }
+        @keyframes cityLights {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100vh; }
+        }
+
+        /* === Estilos para la Sección de Pagos Mejorada === */
+        .payment-section {
+            background: linear-gradient(135deg, #1a1a1a, #121212);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .payment-method {
+            background: #121212;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 280px;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            min-height: 280px;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .payment-method i {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        #paypal-button-container {
+            min-height: 45px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .payment-loading {
+            display: none;
+            color: #d4af37;
+            margin-top: 1rem;
+        }
+
+        .payment-error {
+            color: #ff6b6b;
+            margin-top: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        /* === NUEVO ESTILO PARA EL BOTÓN DE EMERGENCIA === */
+        .emergency-contact {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: #e74c3c;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            box-shadow:
+                0 5px 0 #c0392b,
+                0 10px 20px rgba(231, 76, 60, 0.3);
+            transform: translateY(0);
+            animation: pulse 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow:
+                    0 5px 0 #c0392b,
+                    0 0 0 0 rgba(231, 76, 60, 0.7);
+            }
+            70% {
+                box-shadow:
+                    0 5px 0 #c0392b,
+                    0 0 0 15px rgba(231, 76, 60, 0);
+            }
+            100% {
+                box-shadow:
+                    0 5px 0 #c0392b,
+                    0 0 0 0 rgba(231, 76, 60, 0);
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <img src="images/logo-investigacion-anonima.png" alt="Logo">
+        <img src="images/logo-investigacion-anonima.png" alt="Logo Investigaciones Anónimas">
         <h1>Investigaciones Anónimas</h1>
         <p>Justicia para tus seres queridos, respuestas para tu tranquilidad</p>
     </header>
-    
-    <nav>
-        <a href="#" data-target="inicio">🏠 Inicio</a>
-        <a href="#" data-target="casos">🔍 Casos</a>
-        <a href="#" data-target="contacto">📩 Contacto</a>
-    </nav>
 
     <div class="container">
-        <section id="inicio">
-            <h2>La Verdad Está Aquí</h2>
-            <p>Somos expertos en resolver casos complejos con tecnología de vanguardia y métodos confidenciales.</p>
-            <div class="grid-3">
-                <div class="card">
-                    <h3>🕵♂ Misión</h3>
-                    <p>Brindar soluciones investigativas con absoluta discreción, utilizando tecnología avanzada y metodologías forenses para descubrir la verdad oculta.</p>
+        <section id="inicio" class="active">
+            <div class="inicio-header">
+                <h1>Descubre la Verdad con Nosotros</h1>
+                <p>Expertos en investigación confidencial con tecnología de vanguardia y métodos innovadores</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Tarjeta 1 -->
+                <div class="book-card" onclick="toggleBookCard(this)">
+                    <div class="book-cover">
+                        <div class="icon"><i class="fas fa-user-secret"></i></div>
+                        <h3>Confidencialidad Absoluta</h3>
+                        <p>Tu seguridad es nuestra prioridad</p>
+                    </div>
+                    <div class="book-content">
+                        <p>En Investigaciones Anónimas, protegemos tu identidad con los más altos estándares de seguridad. Nuestros protocolos de confidencialidad garantizan que tu caso se maneje con total discreción, utilizando tecnología de encriptación de última generación.</p>
+
+                        <div class="media-container">
+                            <img src="images/confidencialidad.jpg" alt="Protección de datos">
+                        </div>
+
+                        <p>Todos nuestros agentes están sujetos a estrictos acuerdos de confidencialidad, y nunca compartiremos información sin tu autorización expresa.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>🔭 Visión</h3>
-                    <p>Ser referentes en investigación privada a nivel internacional, manteniendo nuestro compromiso ético y profesionalismo en cada caso.</p>
+
+                <!-- Tarjeta 2 -->
+                <div class="book-card" onclick="toggleBookCard(this)">
+                    <div class="book-cover">
+                        <div class="icon"><i class="fas fa-fingerprint"></i></div>
+                        <h3>Tecnología de Vanguardia</h3>
+                        <p>Herramientas avanzadas para resultados precisos</p>
+                    </div>
+                    <div class="book-content">
+                        <p>Utilizamos tecnología de punta en análisis forense digital, vigilancia inteligente y recolección de evidencia. Nuestros laboratorios cuentan con equipamiento especializado para procesar incluso las pruebas más complejas.</p>
+
+                        <div class="media-container">
+                            <img src="images/tecnologia.jpg" alt="Tecnología de investigación">
+                        </div>
+
+                        <p>Desde análisis de ADN hasta reconstrucciones 3D de escenas del crimen, nuestra tecnología nos permite descubrir verdades que otros no pueden.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>🎯 Objetivo</h3>
-                    <p>Entregar evidencias irrefutables que permitan alcanzar justicia, proteger a los inocentes y esclarecer circunstancias dudosas.</p>
+
+                <!-- Tarjeta 3 -->
+                <div class="book-card" onclick="toggleBookCard(this)">
+                    <div class="book-cover">
+                        <div class="icon"><i class="fas fa-globe"></i></div>
+                        <h3>Cobertura Internacional</h3>
+                        <p>Investigaciones sin fronteras</p>
+                    </div>
+                    <div class="book-content">
+                        <p>Nuestra red global de investigadores nos permite operar en múltiples países con la misma eficiencia y discreción. Colaboramos con profesionales locales para garantizar que cada caso reciba la atención que merece, sin importar su ubicación.</p>
+
+                        <div class="media-container">
+                            <img src="images/cobertura.png" alt="Red internacional">
+                        </div>
+
+                        <p>Hemos resuelto casos en más de 15 países, siempre manteniendo nuestros altos estándares de calidad y confidencialidad.</p>
+                    </div>
+                </div>
+
+                <!-- Nueva Tarjeta 4 -->
+                <div class="book-card" onclick="toggleBookCard(this)">
+                    <div class="book-cover">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Seguridad Digital</h3>
+                        <p>Protección contra amenazas cibernéticas</p>
+                    </div>
+                    <div class="book-content">
+                        <p>Ofrecemos servicios especializados en seguridad digital para proteger tu información sensible. Nuestros expertos en ciberseguridad pueden ayudarte a prevenir hackeos, robo de identidad y otras amenazas en línea.</p>
+
+                        <div class="media-container">
+                            <img src="images/seguridad.png" alt="Seguridad digital">
+                        </div>
+
+                        <p>Desde análisis de vulnerabilidades hasta recuperación de datos comprometidos, te proporcionamos soluciones integrales para mantener tu información a salvo en el mundo digital.</p>
+                    </div>
+                </div>
+
+                <!-- Nueva Tarjeta 5 -->
+                <div class="book-card" onclick="toggleBookCard(this)">
+                    <div class="book-cover">
+                        <div class="icon"><i class="fas fa-balance-scale"></i></div>
+                        <h3>Asesoría Legal</h3>
+                        <p>Apoyo legal especializado</p>
+                    </div>
+                    <div class="book-content">
+                        <p>Colaboramos con una red de abogados especializados que pueden brindarte asesoría legal basada en nuestros hallazgos investigativos. Te ayudamos a construir un caso sólido para presentar ante las autoridades.</p>
+
+                        <div class="media-container">
+                            <img src="images/asesoria.png" alt="Asesoría legal">
+                        </div>
+
+                        <p>Nuestro equipo legal trabaja en conjunto con los investigadores para garantizar que toda la evidencia recolectada cumpla con los requisitos legales y sea admisible en los procesos judiciales.</p>
+                    </div>
                 </div>
             </div>
-            <button onclick="window.location.href='tel:+50230619540'">📞 Contacto Urgente: +502 30619540</button>
         </section>
 
-        <section id="casos">
-            <h2>Casos Resueltos</h2>
-            <p>Especializados en homicidios culposos:</p>
-            <div class="casos-lista">
-                <div class="caso-item">
-                    <h3>🚗 Accidentes Viales</h3>
-                    <p>Reconstrucción forense de colisiones, análisis de cámaras de vigilancia y determinación de responsabilidades.</p>
+        <section id="servicios">
+            <h2 style="color: #d4af37;">Servicios</h2>
+            <div class="grid-3">
+                <div class="servicio-card" onclick="toggleCardContent(this)">
+                    <h3><span>🚗</span> Accidentes Viales</h3>
+                    <div class="servicio-content">
+                        <p>Comprendemos el dolor y la incertidumbre que enfrentas tras un accidente de tránsito. Sabemos lo difícil que es lidiar con las consecuencias físicas, emocionales y legales. Nos comprometemos a reconstruir los hechos con precisión, analizar cámaras de seguridad, entrevistar testigos y determinar responsabilidades. Juntos buscaremos justicia y claridad para que puedas seguir adelante con paz y seguridad.</p>
+                    </div>
                 </div>
-                <div class="caso-item">
+                <div class="servicio-card" onclick="toggleCardContent(this)">
+                    <h3><span>🚨</span> Desaparición Involuntaria</h3>
+                    <div class="servicio-content">
+                        <p>La desaparición de un ser querido es una experiencia devastadora que deja un vacío imposible de llenar. Estamos aquí para acompañarte en cada paso del proceso, utilizando tecnología avanzada, análisis forense y recursos especializados. No descansaremos hasta encontrar respuestas claras y traerte consuelo. Tu esperanza es nuestra guía, y juntos encontraremos luz en medio de la oscuridad.</p>
+                    </div>
+                </div>
+                <div class="servicio-card" onclick="toggleCardContent(this)">
                     <h3>🏥 Negligencia Médica</h3>
-                    <p>Investigación de historiales clínicos, peritajes médicos y seguimiento de personal sanitario.</p>
+                    <div class="servicio-content">
+                        <p>Entendemos el dolor y la frustración que sientes cuando un ser querido sufre por negligencia médica. Sabemos que cada vida importa y que mereces respuestas claras. Con dedicación incansable, investigaremos historiales clínicos, analizaremos procedimientos médicos y trabajaremos con peritos especializados para determinar qué falló. Estamos aquí para ti, para traer justicia y brindarte la paz que tanto necesitas.</p>
+                    </div>
                 </div>
-                <div class="caso-item">
+                <div class="servicio-card" onclick="toggleCardContent(this)">
                     <h3>⚖ Muertes Laborales</h3>
-                    <p>Análisis de condiciones de trabajo, seguridad industrial y cumplimiento de normativas.</p>
+                    <div class="servicio-content">
+                        <p>Las muertes laborales no solo son tragedias personales, sino también llamados de atención sobre la seguridad en el trabajo. Si has perdido a alguien o conoces a alguien afectado, sabemos lo difícil que es enfrentar esta situación. Nos comprometemos a investigar exhaustivamente las condiciones laborales, revisar normativas de seguridad y responsabilidades empresariales. Juntos buscaremos justicia y cambios significativos para evitar futuras tragedias.</p>
+                    </div>
                 </div>
-                <div class="caso-item">
+                <div class="servicio-card" onclick="toggleCardContent(this)">
                     <h3>🏢 Responsabilidad Civil</h3>
-                    <p>Investigación de derrumbes, incendios y otros siniestros en propiedades.</p>
+                    <div class="servicio-content">
+                        <p>Cuando un siniestro como un derrumbe, incendio u otro desastre ocurre en una propiedad, las consecuencias pueden ser devastadoras. Comprendemos el impacto emocional y financiero que esto puede tener en tu vida. Nuestro equipo investigará minuciosamente las causas, identificará responsables y te ayudará a encontrar soluciones legales. No estás solo en este proceso; estamos contigo para devolverte la esperanza.</p>
+                    </div>
                 </div>
-                <div class="caso-item">
+                <div class="servicio-card" onclick="toggleCardContent(this)">
                     <h3>💊 Intoxicaciones</h3>
-                    <p>Rastreo de sustancias peligrosas, análisis toxicológicos y cadena de suministro.</p>
+                    <div class="servicio-content">
+                        <p>Las intoxicaciones pueden ser accidentales o intencionales, pero siempre dejan marcas profundas en quienes las sufren. Si sospechas de sustancias peligrosas o irregularidades en productos, estamos aquí para ayudarte. Realizaremos análisis toxicológicos, rastrearemos cadenas de suministro y trabajaremos incansablemente para descubrir la verdad. Tu seguridad y bienestar son nuestra prioridad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Métodos de Pago Mejorada -->
+        <section id="metodos-pago">
+            <div class="payment-section">
+                <h2 style="color: #d4af37;">Métodos de Pago</h2>
+                <p>Selecciona tu método de pago preferido para contratar nuestros servicios</p>
+                
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <i class="fab fa-paypal"></i>
+                        <h3>PayPal</h3>
+                        <p>Pago seguro con tarjeta o cuenta PayPal</p>
+                        
+                        <div id="paypal-button-container"></div>
+                        <div id="paypal-loading" class="payment-loading">
+                            <i class="fas fa-spinner fa-spin"></i> Cargando PayPal...
+                        </div>
+                        <div id="paypal-error" class="payment-error"></div>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>Transferencia</h3>
+                        <p>Transferencia bancaria directa</p>
+                        <p style="color: #ff0000; font-weight: bold;">En Mantenimiento</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <i class="fab fa-bitcoin"></i>
+                        <h3>Criptomonedas</h3>
+                        <p>Aceptamos Bitcoin y otras criptomonedas</p>
+                        <p style="color: #ff0000; font-weight: bold;">En Mantenimiento</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3>Política de pagos</h3>
+                    <p style="text-align: left; max-width: 600px; margin: 1rem auto;">
+                        - 50% al iniciar la investigación<br>
+                        - 50% al entregar resultados<br>
+                        - Facturación disponible<br>
+                        - Confidencialidad garantizada
+                    </p>
                 </div>
             </div>
         </section>
@@ -182,16 +992,446 @@
         <section id="contacto">
             <h2>Contacto Confidencial</h2>
             <form action="https://formspree.io/f/xnnqklyb" method="POST">
-                <input type="text" name="nombre" placeholder="Nombre completo" required>
-                <input type="email" name="email" placeholder="Correo electrónico" required>
-                <input type="tel" name="telefono" placeholder="Teléfono de contacto" required>
-                <textarea name="mensaje" rows="6" placeholder="Describa su caso..." required></textarea>
+                <div class="form-group">
+                    <input type="text" name="nombre" placeholder="Nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="telefono" placeholder="Teléfono de contacto" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="mensaje" rows="6" placeholder="Describa su caso..." required></textarea>
+                </div>
                 <button type="submit">🔒 Enviar Información</button>
             </form>
         </section>
-    </div>
 
+        <!-- Nueva Sección de Sugerencias -->
+        <section id="sugerencias">
+            <div class="suggestion-form">
+                <h2 style="color: #d4af37;">Envía tus Sugerencias</h2>
+                <p>Valoramos tu opinión para mejorar nuestros servicios. ¿Qué podemos hacer mejor?</p>
+
+                <form action="https://formspree.io/f/xnnqklyb" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="nombre" placeholder="Nombre (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Correo electrónico (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="sugerencia" rows="6" placeholder="Tu sugerencia..." required></textarea>
+                    </div>
+                    <button type="submit">📨 Enviar Sugerencia</button>
+                </form>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <h3>¿Tienes una idea innovadora?</h3>
+                    <p>Si tienes una propuesta para un nuevo servicio o método de investigación, nos encantaría escucharla. Las mejores ideas recibirán una consulta gratuita.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nueva Sección de Ayuda Telefónica -->
+        <section id="ayuda">
+            <div class="phone-help-section">
+                <h2 style="color: #d4af37;">Ayuda Telefónica Inmediata</h2>
+                <p>Si necesitas asistencia urgente o no puedes usar nuestros canales digitales, llámanos directamente:</p>
+
+                <p>Horario de atención: 24/7 para emergencias</p>
+
+                <div style="margin-top: 2rem;">
+                    <h3>Servicios telefónicos:</h3>
+                    <p style="text-align: left; max-width: 600px; margin: 1rem auto;">
+                        - Asesoría inicial gratuita<br>
+                        - Denuncias anónimas<br>
+                        - Soporte en crisis<br>
+                        - Coordinación de reuniones seguras
+                    </p>
+                </div>
+
+                <a href="tel:+50230619540" class="emergency-contact" id="emergencyBtn">
+                    <i class="fas fa-phone"></i> LLAMADA DE EMERGENCIA
+                </a>
+
+                <div style="margin-top: 2rem; font-size: 0.9rem;">
+                    <p>Para casos no urgentes, te recomendamos usar nuestro formulario de contacto para mayor seguridad y seguimiento.</p>
+                </div>
+            </div>
+        </section>
+    </div>
     <footer>
         <p>© 2024 Investigaciones Anónimas</p>
+        <div class="redes-sociales">
+            <a href="https://www.facebook.com/profile.php?id=61573474048723" class="btn-social facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://wa.me/50230619540" class="btn-social whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://t.me/InvestigacionesAnonimas" class="btn-social telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        </div>
         <a href="/politica-privacidad" style="color: #d4af37; text-decoration: none;">Política de Privacidad</a>
     </footer>
+    <a href="tel:+50230619540" class="contact-button">📞</a>
+    <button class="open-sidebar-btn">☰</button>
+    <div class="sidebar">
+        <div class="card" style="margin-top: 80px;">
+            <a href="#" data-target="inicio">🏠 Inicio</a>
+        </div>
+        <div class="card">
+            <a href="#" data-target="servicios">🛠 Servicios</a>
+        </div>
+        <div class="card">
+            <a href="#" data-target="metodos-pago">💰 Método de pago</a>
+        </div>
+        <div class="card">
+            <a href="#" data-target="contacto">📩 Contacto</a>
+        </div>
+        <div class="card">
+            <a href="#" data-target="sugerencias">💡 Sugerencias</a>
+        </div>
+        <div class="card">
+            <a href="#" data-target="ayuda">📞 Ayuda Telefónica</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Botones Premium -->
+    <div class="fixed-buttons" id="fixedButtons">
+        <button class="fixed-button" onclick="toggleButton(this, 'mision')">
+            <i class="fas fa-search"></i>
+            <span></span>
+        </button>
+        <button class="fixed-button" onclick="toggleButton(this, 'vision')">
+            <i class="fas fa-eye"></i>
+            <span></span>
+        </button>
+        <button class="fixed-button" onclick="toggleButton(this, 'objetivo')">
+            <i class="fas fa-bullseye"></i>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- Integración PayPal Mejorada -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AXaDSzTs6Q4tdbBu4RtEvBVdXHhhB0TEbtUQJFJbpoZbzoM9bZZuFxW_wYqQJo8GihSQX2A8ngoH6CVO&currency=USD&components=buttons,marks&debug=true"></script>
+    <script>
+        // Función mejorada para las tarjetas libro - SOLO abre la seleccionada
+        function toggleBookCard(clickedCard) {
+            // Cerrar todas las tarjetas primero
+            document.querySelectorAll('.book-card').forEach(card => {
+                if (card !== clickedCard && card.classList.contains('active')) {
+                    card.classList.remove('active');
+                }
+            });
+
+            // Alternar solo la tarjeta clickeada
+            clickedCard.classList.toggle('active');
+        }
+
+        // Efecto de partículas para el fondo
+        function createParticles() {
+            const container = document.createElement('div');
+            container.className = 'particles';
+            document.body.appendChild(container);
+
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                // Tamaño aleatorio entre 1px y 3px
+                const size = Math.random() * 2 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Posición inicial aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.bottom = `-10px`;
+
+                // Duración de animación aleatoria
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+
+                // Retraso aleatorio
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        // Función para los botones premium
+        function toggleButton(button, type) {
+            const buttons = document.querySelectorAll('.fixed-button');
+            buttons.forEach(btn => {
+                if (btn !== button && btn.classList.contains('active')) {
+                    btn.classList.remove('active');
+                    btn.querySelector('span').textContent = '';
+                }
+            });
+
+            if (!button.classList.contains('active')) {
+                button.classList.add('active');
+                const span = button.querySelector('span');
+                const textos = {
+                    mision: 'Misión: Investigaciones confidenciales con tecnología de vanguardia',
+                    vision: 'Visión: Liderazgo en investigación privada internacional',
+                    objetivo: 'Objetivo: Evidencias irrefutables para alcanzar justicia'
+                };
+                span.textContent = textos[type];
+
+                // Añadir sello confidencial
+                const stamp = document.createElement('div');
+                stamp.className = 'confidential-stamp';
+                button.appendChild(stamp);
+                setTimeout(() => stamp.remove(), 1200);
+
+                // Reset animation
+                void span.offsetWidth;
+                span.style.animation = 'none';
+                setTimeout(() => {
+                    span.style.animation = 'typing 1.2s steps(40, end), blink-caret 0.5s step-end infinite, text-glow 1.5s linear infinite';
+                }, 10);
+            } else {
+                button.classList.remove('active');
+                button.querySelector('span').textContent = '';
+            }
+        }
+
+        // Inicialización de PayPal
+        function initPayPal() {
+            const paypalButtonContainer = document.getElementById('paypal-button-container');
+            const paypalLoading = document.getElementById('paypal-loading');
+            const paypalError = document.getElementById('paypal-error');
+
+            function showLoading() {
+                paypalLoading.style.display = 'block';
+                paypalError.style.display = 'none';
+            }
+
+            function showError(message) {
+                paypalError.textContent = message;
+                paypalError.style.display = 'block';
+                paypalLoading.style.display = 'none';
+                console.error('PayPal Error:', message);
+            }
+
+            function hideStatus() {
+                paypalLoading.style.display = 'none';
+                paypalError.style.display = 'none';
+            }
+
+            showLoading();
+            
+            // Verificar si PayPal SDK se cargó correctamente
+            if (typeof paypal === 'undefined') {
+                showError('No se pudo cargar PayPal. Por favor recarga la página.');
+                return;
+            }
+
+            try {
+                paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color: 'gold',
+                        shape: 'rect',
+                        label: 'pay',
+                        height: 45,
+                        tagline: false
+                    },
+
+                    // Paso 1: Crear la orden
+                    createOrder: function(data, actions) {
+                        console.log('[PayPal] Creando orden...');
+                        showLoading();
+                        
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: '50.00',
+                                    currency_code: 'USD',
+                                    breakdown: {
+                                        item_total: {
+                                            value: '50.00',
+                                            currency_code: 'USD'
+                                        }
+                                    }
+                                },
+                                description: "Servicio de Investigación Privada",
+                                custom_id: "INV-" + Math.floor(Math.random() * 10000),
+                                items: [{
+                                    name: "Investigación Privada",
+                                    description: "Servicio profesional de investigación",
+                                    unit_amount: {
+                                        value: '50.00',
+                                        currency_code: 'USD'
+                                    },
+                                    quantity: '1',
+                                    category: 'DIGITAL_GOODS'
+                                }]
+                            }],
+                            application_context: {
+                                shipping_preference: 'NO_SHIPPING',
+                                user_action: 'PAY_NOW',
+                                brand_name: 'Investigaciones Anónimas',
+                                locale: 'es-ES'
+                            }
+                        }).catch(function(err) {
+                            showError('Error al crear la orden. Intenta nuevamente.');
+                            throw err;
+                        });
+                    },
+
+                    // Paso 2: Aprobar la orden
+                    onApprove: function(data, actions) {
+                        console.log('[PayPal] Orden aprobada:', data);
+                        showLoading();
+                        
+                        return actions.order.capture().then(function(details) {
+                            console.log('[PayPal] Pago completado:', details);
+                            hideStatus();
+                            
+                            // Redirección con parámetros
+                            const queryParams = new URLSearchParams({
+                                transaction_id: details.id,
+                                amount: details.purchase_units[0].amount.value,
+                                email: encodeURIComponent(details.payer.email_address),
+                                status: details.status,
+                                name: encodeURIComponent(details.payer.name.given_name + ' ' + details.payer.name.surname),
+                                timestamp: new Date().toISOString()
+                            });
+                            
+                            window.location.href = "pago-exitoso.html?" + queryParams.toString();
+                        }).catch(function(err) {
+                            showError('Error al procesar el pago. Verifica tu información.');
+                            console.error('[PayPal] Error al capturar:', err);
+                        });
+                    },
+
+                    // Manejo de errores
+                    onError: function(err) {
+                        let errorMessage = 'Error en el proceso de pago.';
+                        
+                        if (err.message.includes('No ack for postMessage')) {
+                            errorMessage = 'Error de conexión con PayPal. Verifica tu internet.';
+                        } else if (err.message.includes('createOrder')) {
+                            errorMessage = 'Error al crear la orden. Contacta al soporte.';
+                        }
+                        
+                        showError(errorMessage);
+                        console.error('[PayPal] Error:', err);
+                    },
+
+                    // Cuando el usuario cancela
+                    onCancel: function(data) {
+                        console.log('[PayPal] Pago cancelado:', data);
+                        showError('Has cancelado el pago. Puedes intentar nuevamente.');
+                    },
+
+                    // Cuando se hace clic en el botón
+                    onClick: function() {
+                        console.log('[PayPal] Botón clickeado');
+                        hideStatus();
+                    }
+
+                }).render('#paypal-button-container').then(function() {
+                    console.log('[PayPal] Botón renderizado correctamente');
+                    hideStatus();
+                }).catch(function(err) {
+                    showError('Error al cargar el botón de pago.');
+                    console.error('[PayPal] Error al renderizar:', err);
+                });
+                
+            } catch (error) {
+                showError('Error al inicializar PayPal.');
+                console.error('[PayPal] Error crítico:', error);
+            }
+        }
+
+        // Cargar cuando el DOM esté listo
+        document.addEventListener("DOMContentLoaded", () => {
+            createParticles();
+
+            const sidebar = document.querySelector('.sidebar');
+            const openBtn = document.querySelector('.open-sidebar-btn');
+            const overlay = document.querySelector('.overlay');
+            const sections = document.querySelectorAll('section');
+
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = link.dataset.target;
+                    sections.forEach(sec => sec.classList.remove('active'));
+                    if(document.getElementById(target)) {
+                        document.getElementById(target).classList.add('active');
+                    }
+                    sidebar.classList.remove('active');
+                    overlay.style.display = 'none';
+                });
+            });
+
+            openBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.style.display = 'none';
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.style.display = 'none';
+                }
+            });
+
+            document.getElementById('inicio').classList.add('active');
+            
+            // Inicializar PayPal
+            initPayPal();
+        });
+
+        function toggleCardContent(card) {
+            // Cerrar otras tarjetas de servicio primero
+            document.querySelectorAll('.servicio-card').forEach(item => {
+                if (item !== card && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Alternar solo la tarjeta clickeada
+            card.classList.toggle("active");
+        }
+
+        // Ocultar botones al hacer scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            const buttons = document.querySelector('.fixed-buttons');
+
+            if (currentScroll > lastScroll + 50) { // Scroll hacia abajo
+                buttons.style.transform = 'translateY(100px)';
+                buttons.style.opacity = '0';
+            } else if (currentScroll < lastScroll - 20) { // Scroll hacia arriba
+                buttons.style.transform = 'translateY(0)';
+                buttons.style.opacity = '1';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Confirmación para el botón de emergencia
+        document.getElementById('emergencyBtn').addEventListener('click', function(e) {
+            if(!confirm('¿Desea realizar una llamada de emergencia ahora?')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
