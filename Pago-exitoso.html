@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Exitoso - Investigaciones Anónimas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d0d0d;
+            color: #cccccc;
+            text-align: center;
+            padding: 2rem;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 5rem auto;
+            background: #1a1a1a;
+            padding: 3rem;
+            border-radius: 10px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        h1 {
+            color: #d4af37;
+            margin-bottom: 1.5rem;
+        }
+        .success-icon {
+            font-size: 5rem;
+            color: #4CAF50;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s;
+        }
+        .details {
+            background: #121212;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+        .btn {
+            display: inline-block;
+            background: #d4af37;
+            color: #0d0d0d;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #b38e2e;
+            transform: translateY(-2px);
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-30px);}
+            60% {transform: translateY(-15px);}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1>¡Pago Completado con Éxito!</h1>
+        <p>Gracias por contratar nuestros servicios. Hemos recibido tu pago correctamente.</p>
+        
+        <div class="details" id="payment-details">
+            <!-- Los detalles se llenarán con JavaScript -->
+        </div>
+        
+        <p>Recibirás un correo electrónico con los detalles de tu transacción y los próximos pasos.</p>
+        <a href="index.html" class="btn">Volver al Inicio</a>
+    </div>
+
+    <script>
+        // Obtener parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const transactionId = urlParams.get('transaction_id');
+        const amount = urlParams.get('amount');
+        const email = urlParams.get('email');
+        const status = urlParams.get('status');
+        const name = urlParams.get('name');
+        
+        // Mostrar detalles del pago
+        const detailsContainer = document.getElementById('payment-details');
+        
+        if(transactionId && amount) {
+            detailsContainer.innerHTML = `
+                <h3>Detalles del Pago:</h3>
+                <div class="detail-row">
+                    <span>N° de Transacción:</span>
+                    <span>${transactionId}</span>
+                </div>
+                <div class="detail-row">
+                    <span>Monto:</span>
+                    <span>$${amount} USD</span>
+                </div>
+                <div class="detail-row">
+                    <span>Estado:</span>
+                    <span>${status || 'COMPLETADO'}</span>
+                </div>
+                <div class="detail-row">
+                    <span>Cliente:</span>
+                    <span>${name || 'No especificado'}</span>
+                </div>
+                <div class="detail-row">
+                    <span>Email:</span>
+                    <span>${email || 'No especificado'}</span>
+                </div>
+            `;
+        } else {
+            detailsContainer.innerHTML = '<p>Gracias por tu pago. Si tienes alguna pregunta, contáctanos.</p>';
+        }
+    </script>
+</body>
+</html>
